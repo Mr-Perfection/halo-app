@@ -5,7 +5,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-// import List from '@mui/material/List';
+import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -17,14 +17,17 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { mainListItems, secondaryListItems } from 'molecules/ListItems';
+import Chart from 'molecules/Chart';
 import InfoWidget from 'molecules/InfoWidget';
+import Orders from 'molecules/Orders';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center" sx={{ pt: 4 }}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        TBD
+        Your Website
       </Link>
       {' '}
       {new Date().getFullYear()}
@@ -143,11 +146,11 @@ function DashboardContent() {
             </IconButton>
           </Toolbar>
           <Divider />
-          {/* <List component="nav">
+          <List component="nav">
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
-          </List> */}
+          </List>
         </Drawer>
         <Box
           component="main"
@@ -163,6 +166,20 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
+              {/* Chart */}
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <Chart />
+                </Paper>
+              </Grid>
+              {/* Recent InfoWidget */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -173,13 +190,12 @@ function DashboardContent() {
                   }}
                 >
                   <InfoWidget title="Hello" description="world" />
-                  {/* <Deposits /> */}
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  {/* <Orders /> */}
+                  <Orders />
                 </Paper>
               </Grid>
             </Grid>
