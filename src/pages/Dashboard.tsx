@@ -116,7 +116,7 @@ function DashboardContent() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
+            {/* <Typography
               component="h1"
               variant="h6"
               color="inherit"
@@ -124,12 +124,20 @@ function DashboardContent() {
               sx={{ flexGrow: 1 }}
             >
               Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+            </Typography> */}
+            <Box width="100%" display="flex" justifyContent="flex-end">
+              <IconButton color="inherit">
+                {/* <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
-              </Badge>
-            </IconButton>
+              </Badge> */}
+                <Typography
+                  component="h1"
+                  variant="h6"
+                >
+                  Sign out
+                </Typography>
+              </IconButton>
+            </Box>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
