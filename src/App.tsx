@@ -4,14 +4,18 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 
+import Dashboard from 'organisms/Dashboard';
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}.
+      </Link>
+      {' '}
+      {new Date().getFullYear()}
+      .
     </Typography>
   );
 }
@@ -23,6 +27,7 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           Halo App
         </Typography>
+        <Dashboard />
         <Copyright />
       </Box>
     </Container>
