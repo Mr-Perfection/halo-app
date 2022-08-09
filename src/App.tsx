@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Dashboard from 'pages/Dashboard';
+import OperatorView from 'pages/OperatorView';
 
 export default function App() {
-  return (<Dashboard />);
+  return (<OperatorView />);
 }

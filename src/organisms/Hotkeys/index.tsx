@@ -3,7 +3,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 
 // MUI
 import {
-  ListItem, ListItemText, Box, List, Typography, ListSubheader,
+  ListItem, ListItemText, Box, List, Typography,
 } from '@mui/material';
 
 // src
