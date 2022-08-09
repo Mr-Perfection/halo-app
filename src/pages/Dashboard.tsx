@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+
+// MUI
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -9,14 +11,16 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
+// import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+// import NotificationsIcon from '@mui/icons-material/Notifications';
+// src
+import Hotkeys from 'organisms/Hotkeys';
 import { mainListItems, secondaryListItems } from 'molecules/ListItems';
 import Chart from 'molecules/Chart';
 import InfoWidget from 'molecules/InfoWidget';
@@ -93,6 +97,8 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const [count, setCount] = useState<number>(0);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -208,6 +214,7 @@ function DashboardContent() {
               </Grid>
             </Grid>
             <Copyright />
+            <Hotkeys />
           </Container>
         </Box>
       </Box>
