@@ -98,8 +98,6 @@ function DashboardContent() {
     setOpen(!open);
   };
 
-  const [count, setCount] = useState<number>(0);
-
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
