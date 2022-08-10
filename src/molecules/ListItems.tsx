@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
+// src
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -8,20 +11,24 @@ import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
-export const mainListItems = (
+export const MainListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Operator" />
-    </ListItemButton>
+    <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/dashboard">
+      <ListItemButton>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+    </Link>
+    <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/operator">
+      <ListItemButton>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Operator" />
+      </ListItemButton>
+    </Link>
     <ListItemButton>
       <ListItemIcon>
         <LogoutIcon />
