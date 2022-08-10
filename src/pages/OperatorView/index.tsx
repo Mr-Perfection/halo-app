@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // MUI
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -16,24 +16,23 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import { Stack } from '@mui/material';
+import { ListItemText, Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
+import Title from 'atoms/Title';
 import Hotkeys from 'organisms/Hotkeys';
 import { mainListItems, secondaryListItems } from 'molecules/ListItems';
-import Chart from 'molecules/Chart';
-import InfoWidget from 'molecules/InfoWidget';
-import Orders from 'molecules/Orders';
 import OnlineSwitch from 'pages/OperatorView/OnlineSwitch';
+import { MOCK_RESPONSE } from 'pages/OperatorView/mocks';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center" sx={{ pt: 4 }}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Test Inc.
+        Social Karma Inc.
       </Link>
       {' '}
       {new Date().getFullYear()}
@@ -186,44 +185,39 @@ function OperatorViewContent() {
               </Stack>
               <Hotkeys />
             </Box>
+            <Divider sx={{ marginTop: 2, marginBottom: 2 }} />
+            <Typography component="h1" variant="h5" color="primary">Ticket #19238</Typography>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent InfoWidget */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <InfoWidget title="Hello" description="world" />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
+              {Object.keys(MOCK_RESPONSE).map((key) => (
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <Title>{key}</Title>
+                    <List dense>
+                      {Object.keys(MOCK_RESPONSE[key]).map(
+                        (dkey) => (
+                          <ListItemText
+                            primary={dkey}
+                            secondary={MOCK_RESPONSE[key][dkey]}
+                          />
+                        ),
+                      )}
+
+                    </List>
+                    <Typography sx={{ flex: 1 }} />
+                  </Paper>
+                </Grid>
+              ))}
             </Grid>
-            <Copyright />
           </Container>
         </Box>
       </Box>
+      <Copyright />
     </ThemeProvider>
   );
 }
