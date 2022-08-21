@@ -1,9 +1,14 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import cache from './cache';
+import { createClient } from 'urql';
+// import cache from './cache';
 
-const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-  cache,
-  uri: 'http://localhost:4001/graphql',
+const client = createClient({
+  url: 'http://localhost:4001/graphql',
+  // fetchOptions: () => {
+  //   const token = getToken();
+  //   return {
+  //     headers: { authorization: token ? `Bearer ${token}` : '' },
+  //   };
+  // },
 });
 
 export default client;

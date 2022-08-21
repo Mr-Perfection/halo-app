@@ -1,7 +1,7 @@
 import React from 'react';
+import { Provider } from 'urql';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { ApolloProvider } from '@apollo/client';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
@@ -16,7 +16,7 @@ const root = createRoot(rootElement!);
 
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <Provider value={client}>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
@@ -25,6 +25,6 @@ root.render(
         </BrowserRouter>
         <Copyright />
       </ThemeProvider>
-    </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
 );
