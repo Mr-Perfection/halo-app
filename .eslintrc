@@ -2,7 +2,7 @@
   "extends": ["airbnb", "airbnb/hooks", "airbnb-typescript"],
   "settings": {
     "react": {
-      "version": "detect",
+      "version": "detect"
     },
     "import/resolver": {
       "node": {
