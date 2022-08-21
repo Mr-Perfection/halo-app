@@ -53,7 +53,7 @@ function OperatorViewContent() {
         <Typography component="h1" variant="h5" color="primary">Ticket #19238</Typography>
         <Grid container spacing={3}>
           {Object.keys(MOCK_RESPONSE).map((key) => (
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={4} lg={3} key={key}>
               <Paper
                 sx={{
                   p: 2,
@@ -68,6 +68,7 @@ function OperatorViewContent() {
                       <ListItemText
                         primary={dkey}
                         secondary={MOCK_RESPONSE[key][dkey]}
+                        key={dkey}
                       />
                     ),
                   )}
