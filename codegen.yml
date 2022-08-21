@@ -7,7 +7,3 @@ generates:
       - typescript
       - typescript-operations
       - typed-document-node
-      - urql-introspection
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
