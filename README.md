@@ -22,3 +22,12 @@ npm 8.15.1
 
 * Dynamically render components based on json data.
 https://www.pluralsight.com/guides/how-to-render-a-component-dynamically-based-on-a-json-config
+
+
+# Start server locally
+```sh
+yarn run start
+```
+
+# GraphQL Codegen
+https://github.com/dotansimha/graphql-code-generator
