@@ -1,6 +1,7 @@
 import {
   createClient, dedupExchange, cacheExchange, fetchExchange,
 } from 'urql';
+import { devtoolsExchange } from '@urql/devtools';
 
 const client = createClient({
   url: 'http://localhost:4000/graphql',
@@ -11,6 +12,7 @@ const client = createClient({
     dedupExchange,
     cacheExchange,
     fetchExchange,
+    devtoolsExchange,
   ],
   // fetchOptions: () => {
   //   const token = getToken();
