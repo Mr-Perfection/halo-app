@@ -1,6 +1,5 @@
 mutation authSignupMutation($customerSlug: String!, $email: String!, $password: String!, $firstName: String!, $lastName: String!) {
   signup(customerSlug: $customerSlug, email: $email, password: $password, firstName: $firstName, lastName: $lastName) {
-    token
     user {
       firstName
       lastName

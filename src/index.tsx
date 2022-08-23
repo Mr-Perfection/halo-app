@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
 // src
-import client from 'graphql/client';
+import graphQLClient from 'graphql/client';
 import Copyright from 'molecules/Copyright';
 import App from './App';
 import theme from './theme';
@@ -16,7 +16,7 @@ const root = createRoot(rootElement!);
 
 root.render(
   <React.StrictMode>
-    <Provider value={client}>
+    <Provider value={graphQLClient}>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
