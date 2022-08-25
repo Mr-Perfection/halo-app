@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 // MUI
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -76,6 +76,8 @@ export default function App() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const location = useLocation();
+  console.log('state is ', location.state);
 
   return (
     <Box sx={{ display: 'flex' }}>

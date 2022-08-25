@@ -4,20 +4,6 @@ import {
 import { cacheExchange } from '@urql/exchange-graphcache';
 import { devtoolsExchange } from '@urql/devtools';
 import { authExchange } from '@urql/exchange-auth';
-import Cookies from 'js-cookie';
-
-const getAuth = async ({ authState }: { authState: { access: string, refresh: string } }) => {
-  if (!authState) {
-    const access = Cookies.get('access');
-    const refresh = Cookies.get('refresh');
-    if (access && refresh) {
-      return { access, refresh };
-    }
-    return null;
-  }
-
-  return null;
-};
 
 const client = createClient({
   url: 'http://localhost:4000/graphql',
