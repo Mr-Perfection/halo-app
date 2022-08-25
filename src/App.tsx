@@ -144,8 +144,7 @@ export default function App() {
       </Drawer>
       <Routes>
         {/* TODO: Based on permissions, render root page to operator or dashboard. */}
-        <Route path="/" element={<OperatorView />} />
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/operator" element={<OperatorView />} />
       </Routes>
     </Box>

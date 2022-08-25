@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'urql';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -12,9 +13,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // src
 import { AuthLoginQueryDocument } from 'generated/graphql';
-import { passwordRegex } from 'Utils/auth';
+import { passwordRegex } from 'utils/auth';
+import { isEmpty } from 'lodash';
+import paths from 'constants/nav';
 
 export default function Login() {
+  const navigate = useNavigate();
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -53,6 +57,11 @@ export default function Login() {
     setFormData(formik.values);
   }, [formik.values, setFormData]);
 
+  const loginSuccess = !isEmpty(loginResult.data?.login?.user);
+  if (loginSuccess) {
+    navigate(paths.ROOT, { state: loginResult.data?.login?.user });
+    return null;
+  }
   return (
     <Box
       sx={{
