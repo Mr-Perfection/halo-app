@@ -19,6 +19,7 @@ import { MainListItems } from 'molecules/ListItems';
 import OperatorView from 'pages/OperatorView';
 import Dashboard from 'pages/Dashboard';
 import { Signup } from 'pages/Auth';
+import Login from 'pages/Auth/Login';
 
 const drawerWidth: number = 240;
 
@@ -146,7 +147,6 @@ export default function App() {
         <Route path="/" element={<OperatorView />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="/operator" element={<OperatorView />} />
-        <Route path="/signup" element={<Signup />} />
       </Routes>
     </Box>
   );
