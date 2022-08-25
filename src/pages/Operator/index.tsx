@@ -24,8 +24,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Title from 'atoms/Title';
 import Hotkeys from 'organisms/Hotkeys';
 import { mainListItems, secondaryListItems } from 'molecules/ListItems';
-import OnlineSwitch from 'pages/OperatorView/OnlineSwitch';
-import { MOCK_RESPONSE } from 'pages/OperatorView/mocks';
+import OnlineSwitch from 'pages/Operator/OnlineSwitch';
+import { MOCK_RESPONSE } from 'pages/Operator/mocks';
 
 function OperatorViewContent() {
   return (
