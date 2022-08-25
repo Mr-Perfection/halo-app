@@ -1,6 +1,7 @@
 mutation authSignupMutation($customerSlug: String!, $email: String!, $password: String!, $firstName: String!, $lastName: String!) {
   signup(customerSlug: $customerSlug, email: $email, password: $password, firstName: $firstName, lastName: $lastName) {
     user {
+      id
       firstName
       lastName
       email
@@ -12,6 +13,7 @@ mutation authSignupMutation($customerSlug: String!, $email: String!, $password: 
 query authLoginQuery($email: String!, $password: String!) {
   login(email: $email, password: $password) {
     user {
+      id
       firstName
       lastName
       email

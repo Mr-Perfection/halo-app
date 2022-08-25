@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import {
+  Navigate,
+  Route, Routes, useLocation, useNavigate,
+} from 'react-router-dom';
 // MUI
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,10 +19,14 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
 import { MainListItems } from 'molecules/ListItems';
-import OperatorView from 'pages/OperatorView';
+import OperatorPage from 'pages/Operator';
 import Dashboard from 'pages/Dashboard';
 import { Signup } from 'pages/Auth';
 import Login from 'pages/Auth/Login';
+import { User, UserRole } from 'generated/graphql';
+import { isEmpty } from 'lodash';
+import paths from 'constants/nav';
+import AdminPage from 'pages/Admin';
 
 const drawerWidth: number = 240;
 
@@ -76,8 +83,25 @@ export default function App() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
   const location = useLocation();
-  console.log('state is ', location.state);
+  let currentUser: User;
+  if (isEmpty(location.state)) return <Navigate to={paths.LOGIN} replace />;
+  try {
+    currentUser = location.state as User;
+  } catch {
+    return <Navigate to={paths.LOGIN} replace />;
+  }
+  const mainPage = () => {
+    switch (currentUser.role) {
+      case UserRole.Admin:
+        return <AdminPage id={currentUser.id} />;
+      default:
+        return <OperatorPage />;
+    }
+  };
+
+  console.log('state is ', currentUser);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -146,8 +170,10 @@ export default function App() {
       </Drawer>
       <Routes>
         {/* TODO: Based on permissions, render root page to operator or dashboard. */}
+        <Route path="/" element={mainPage()} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/operator" element={<OperatorView />} />
+        <Route path="/operator" element={<OperatorPage />} />
+        <Route path="/admin" element={<AdminPage id={currentUser.id} />} />
       </Routes>
     </Box>
   );

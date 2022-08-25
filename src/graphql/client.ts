@@ -13,34 +13,34 @@ const client = createClient({
   exchanges: [
     dedupExchange,
     cacheExchange({}),
-    fetchExchange,
     devtoolsExchange,
     errorExchange({
-      onError: (error) => {
+      onError(error) {
+        console.log('log out user', error);
         // we only get an auth error here when the
         // auth exchange had attempted to refresh auth
         // and getting an auth error again for the second time
         const isAuthError = error.graphQLErrors.some(
           (e) => e.extensions?.code === 'UNAUTHENTICATED',
         );
-
         if (isAuthError) {
           // clear storage, log the user out etc
           console.log('log out user');
-          window.history.pushState({}, '', '/login');
+          window.history.replaceState({}, '', '/login');
         }
       },
     }),
+    fetchExchange,
     // All the auth logic is handled by http-only cookies.
-    authExchange({
-      getAuth: async () => null,
-      addAuthToOperation: ({
-        operation,
-      }) => operation,
-      didAuthError: ({ error }) => error.graphQLErrors.some(
-        (e) => e.extensions?.code === 'UNAUTHENTICATED',
-      ),
-    }),
+    // authExchange({
+    //   getAuth: async () => null,
+    //   addAuthToOperation: ({
+    //     operation,
+    //   }) => operation,
+    //   didAuthError: ({ error }) => error.graphQLErrors.some(
+    //     (e) => e.extensions?.code === 'UNAUTHENTICATED',
+    //   ),
+    // }),
   ],
 
   // fetchOptions: () => {
