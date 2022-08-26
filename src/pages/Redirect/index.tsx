@@ -2,7 +2,6 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 // src
-import { AuthContext } from 'Routes';
 import paths from 'constants/nav';
 import { User, UserRole } from 'generated/graphql';
 
