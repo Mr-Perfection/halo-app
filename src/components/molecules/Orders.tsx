@@ -5,7 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from 'atoms/Title';
+import Title from 'components/atoms/Title';
 
 // Generate Order Data
 function createData(
@@ -16,7 +16,9 @@ function createData(
   paymentMethod: string,
   amount: number,
 ) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+  return {
+    id, date, name, shipTo, paymentMethod, amount,
+  };
 }
 
 const rows = [

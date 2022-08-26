@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 // src
 import graphQLClient from 'graphql/client';
-import Copyright from 'molecules/Copyright';
+import Copyright from 'components/molecules/Copyright';
 import AppRoutes from 'Routes';
 import theme from './theme';
 

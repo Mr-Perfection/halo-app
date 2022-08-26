@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
-import { MainListItems } from 'molecules/ListItems';
+import { MainListItems } from 'components/molecules/ListItems';
 import { AuthContext } from 'Routes';
 
 const drawerWidth: number = 240;

@@ -7,9 +7,9 @@ import {
 } from '@mui/material';
 
 // src
-import { IHotkey } from 'organisms/Hotkeys/types';
-import { HOT_KEYS, SHOW_HOT_KEYS } from 'organisms/Hotkeys/constants';
-import Title from 'atoms/Title';
+import { IHotkey } from 'components/organisms/Hotkeys/types';
+import { HOT_KEYS, SHOW_HOT_KEYS } from 'components/organisms/Hotkeys/constants';
+import Title from 'components/atoms/Title';
 
 function Hotkey({ value, name }: IHotkey): ReactElement {
   useHotkeys(value, () => { console.log(`You have pressed ${name}`); });

@@ -13,10 +13,10 @@ import Paper from '@mui/material/Paper';
 import { ListItemText, Stack } from '@mui/material';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
-import Title from 'atoms/Title';
-import Hotkeys from 'organisms/Hotkeys';
-import OnlineSwitch from 'pages/Operator/OnlineSwitch';
-import { MOCK_RESPONSE } from 'pages/Operator/mocks';
+import Title from 'components/atoms/Title';
+import Hotkeys from 'components/organisms/Hotkeys';
+import OnlineSwitch from 'components/pages/Operator/OnlineSwitch';
+import { MOCK_RESPONSE } from 'components/pages/Operator/mocks';
 
 function OperatorViewContent() {
   return (

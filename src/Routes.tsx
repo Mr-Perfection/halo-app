@@ -4,15 +4,15 @@ import {
 } from 'react-router-dom';
 
 import App from 'App';
-import { Signup } from 'pages/Auth';
+import { Signup } from 'components/pages/Auth';
 import paths from 'constants/nav';
 import { User } from 'generated/graphql';
-import Login from 'pages/Auth/Login';
-import PrivateRoute from 'atoms/PrivateRoute';
-import AdminPage from 'pages/Admin';
-import AppTemplate from 'template/AppTemplate';
-import OperatorPage from 'pages/Operator';
-import NotFound from 'pages/NotFound';
+import Login from 'components/pages/Auth/Login';
+import PrivateRoute from 'components/atoms/PrivateRoute';
+import AdminPage from 'components/pages/Admin';
+import AppTemplate from 'components/templates/AppTemplate';
+import OperatorPage from 'components/pages/Operator';
+import NotFound from 'components/pages/NotFound';
 
 export const AuthContext = React.createContext<User | null>(null);
 

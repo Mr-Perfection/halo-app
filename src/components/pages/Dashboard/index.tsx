@@ -20,11 +20,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
-import Hotkeys from 'organisms/Hotkeys';
-import { mainListItems, secondaryListItems } from 'molecules/ListItems';
-import Chart from 'molecules/Chart';
-import InfoWidget from 'molecules/InfoWidget';
-import Orders from 'molecules/Orders';
+import Hotkeys from 'components/organisms/Hotkeys';
+import { mainListItems, secondaryListItems } from 'components/molecules/ListItems';
+import Chart from 'components/molecules/Chart';
+import InfoWidget from 'components/molecules/InfoWidget';
+import Orders from 'components/molecules/Orders';
 
 function DashboardContent() {
   return (

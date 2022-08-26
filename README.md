@@ -31,3 +31,7 @@ yarn run start
 
 # GraphQL Codegen
 https://github.com/dotansimha/graphql-code-generator
+
+
+# Deployment
+aws s3 sync build s3://vwww-frontend-testInfo

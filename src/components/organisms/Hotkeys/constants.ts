@@ -1,4 +1,4 @@
-import { IHotkey } from 'organisms/Hotkeys/types';
+import { IHotkey } from 'components/organisms/Hotkeys/types';
 
 export const HOT_KEYS: IHotkey[] = [
   {
