@@ -5,74 +5,15 @@ Description: >
       - An Amazon S3 bucket for hosting the application
       - An Amazon CloudFront distribution to expose the application
       - An Amazon S3 bucket for hosting bucket and cloudfront access logs
-      - A public API to be used by the application to demonstrate CORS configuration
 
 Parameters: {}
 
 Resources:
-  # Our simple CORS compliant REST API
-  SimpleAPI:
-    Type: 'AWS::ApiGateway::RestApi'
-    Properties:
-      Description: A simple CORS compliant API
-      Name: SimpleAPI
-      EndpointConfiguration:
-        Types:
-          - REGIONAL
-
-  # The Resource (/hello) of our API
-  SimpleAPIResource:
-    Type: 'AWS::ApiGateway::Resource'
-    Properties:
-      ParentId: !GetAtt
-        - SimpleAPI
-        - RootResourceId
-      PathPart: hello
-      RestApiId: !Ref SimpleAPI
-
-  # The method to call (GET) for our API
-  HelloAPIGETMethod:
-    Type: 'AWS::ApiGateway::Method'
-    #checkov:skip=CKV_AWS_59: "This API does not expose backend service"
-    Properties:
-      ApiKeyRequired: false
-      AuthorizationType: NONE
-      HttpMethod: GET
-      Integration:
-        Type: MOCK
-        PassthroughBehavior: WHEN_NO_MATCH
-        RequestTemplates:
-          application/json: "{\n \"statusCode\": 200\n}"
-        IntegrationResponses:
-          - StatusCode: 200
-            SelectionPattern: 200
-            ResponseParameters:
-              method.response.header.Access-Control-Allow-Origin: '''*'''
-            ResponseTemplates:
-              application/json: "{\"message\": \"Hello World!\"}"
-      MethodResponses:
-        - StatusCode: 200
-          ResponseParameters:
-            method.response.header.Access-Control-Allow-Origin: true
-          ResponseModels:
-            application/json: Empty
-      RestApiId: !Ref SimpleAPI
-      ResourceId: !Ref SimpleAPIResource
-
-  # A deployment resource for deploying our API
-  Deployment:
-    Type: 'AWS::ApiGateway::Deployment'
-    DependsOn:
-      - HelloAPIGETMethod
-    Properties:
-      RestApiId: !Ref SimpleAPI
-      StageName: v1
-
   # The Amazon S3 bucket into which our Single Page Application build files must be deployed
   S3Bucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub 'react-cors-spa-${SimpleAPI}'
+      BucketName: !Sub 'www-frontend'
       PublicAccessBlockConfiguration:
         BlockPublicAcls : true
         BlockPublicPolicy : true
@@ -113,7 +54,7 @@ Resources:
     #checkov:skip=CKV_AWS_18: "This bucket is private and only for storing logs"
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub 'react-cors-spa-${SimpleAPI}-logs'
+      BucketName: !Sub 'www-frontend-logs'
       PublicAccessBlockConfiguration:
         BlockPublicAcls : true
         BlockPublicPolicy : true
@@ -164,10 +105,8 @@ Resources:
       - S3Bucket
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: !Sub 'access-identity-react-cors-spa-${SimpleAPI}'
+        Comment: !Sub 'access-identity-www-frontend'
 
 Outputs:
-  APIEndpoint:
-    Value: !Sub "https://${SimpleAPI}.execute-api.${AWS::Region}.amazonaws.com/v1/hello"
   BucketName:
     Value: !Sub "react-cors-spa-${CFOriginAccessIdentity}"

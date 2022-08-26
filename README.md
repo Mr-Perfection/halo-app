@@ -34,4 +34,7 @@ https://github.com/dotansimha/graphql-code-generator
 
 
 # Deployment
-aws s3 sync build s3://vwww-frontend-testInfo
+I followed this tutorial with some modifications
+https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-a-react-based-single-page-application-to-amazon-s3-and-cloudfront.html
+
+add `DISABLE_ESLINT_PLUGIN=true` in .env.production
