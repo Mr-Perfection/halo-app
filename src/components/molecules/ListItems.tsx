@@ -38,7 +38,7 @@ export const MainListItems = (
   </React.Fragment>
 );
 
-export const secondaryListItems = (
+export const SecondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
       Saved reports
