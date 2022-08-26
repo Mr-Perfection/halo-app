@@ -16,15 +16,15 @@ const root = createRoot(rootElement!);
 
 root.render(
   <React.StrictMode>
-    <Provider value={graphQLClient}>
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <BrowserRouter>
+        <Provider value={graphQLClient}>
           <AppRoutes />
-        </BrowserRouter>
+        </Provider>
         <Copyright />
       </ThemeProvider>
-    </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
 );

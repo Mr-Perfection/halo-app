@@ -84,6 +84,6 @@ function OperatorViewContent() {
   );
 }
 
-export default function OperatorView() {
+export default function OperatorPage() {
   return <OperatorViewContent />;
 }

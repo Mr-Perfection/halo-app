@@ -3,7 +3,7 @@ import {
 } from 'urql';
 import { cacheExchange } from '@urql/exchange-graphcache';
 import { devtoolsExchange } from '@urql/devtools';
-import { authExchange } from '@urql/exchange-auth';
+import { redirectToLogin } from 'utils/auth';
 
 const client = createClient({
   url: 'http://localhost:4000/graphql',
@@ -16,7 +16,6 @@ const client = createClient({
     devtoolsExchange,
     errorExchange({
       onError(error) {
-        console.log('log out user', error);
         // we only get an auth error here when the
         // auth exchange had attempted to refresh auth
         // and getting an auth error again for the second time
@@ -24,9 +23,7 @@ const client = createClient({
           (e) => e.extensions?.code === 'UNAUTHENTICATED',
         );
         if (isAuthError) {
-          // clear storage, log the user out etc
-          console.log('log out user');
-          window.history.replaceState({}, '', '/login');
+          redirectToLogin();
         }
       },
     }),

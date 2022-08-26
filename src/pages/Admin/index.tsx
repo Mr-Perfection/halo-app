@@ -1,14 +1,24 @@
 import React from 'react';
-
-import { AdminGetUsersDocument } from 'generated/graphql';
+import { Navigate } from 'react-router-dom';
 import { useQuery } from 'urql';
 
-function AdminPage({ id }: { id: number }) {
+import { AdminGetUsersDocument, UserRole } from 'generated/graphql';
+import { AuthContext } from 'Routes';
+import paths from 'constants/nav';
+
+function AdminPage() {
+  const currentUser = React.useContext(AuthContext);
   const [getUsersResult] = useQuery({
     query: AdminGetUsersDocument,
     variables: {},
   });
-  console.log('getUsersResult', getUsersResult);
+  // TODO: this can be abstracted as some kind for permission layer component.
+  const role = currentUser?.role;
+  if (role === undefined || role !== UserRole.Admin) {
+    return (<Navigate to={paths.NOT_FOUND} />);
+  }
+
+  console.log('getUsersResult is', getUsersResult);
   return (<div>Hello world</div>);
 }
 

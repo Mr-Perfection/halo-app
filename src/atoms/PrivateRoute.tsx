@@ -1,18 +1,16 @@
-// import React from 'react';
-// import Cookies from 'js-cookie';
-// import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate, Route, useNavigate } from 'react-router-dom';
 
-// function PrivateRoute({ path }: {path: string}) {
-//   const navigate = useNavigate();
-//   if (!Cookies.get('token')) {
-//     navigate('/login');
-//   }
+import paths from 'constants/nav';
+import { AuthContext } from 'Routes';
 
-//   return (
-//     <div>
-//       Private area!
-//     </div>
-//   );
-// }
+function PrivateRoute({ element }: { element: JSX.Element }) {
+  const currentUser = React.useContext(AuthContext);
+  if (currentUser === null) {
+    return (<Navigate to={paths.LOGIN} replace />);
+  }
 
-// export default PrivateRoute;
+  return element;
+}
+
+export default PrivateRoute;

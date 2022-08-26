@@ -48,16 +48,14 @@ export default function Login({ onLogin }: { onLogin: (user: User) => {} }) {
       login();
     },
   });
-
+  const user = loginResult.data?.login?.user;
   useEffect(() => {
     setFormData(formik.values);
-  }, [formik.values, setFormData]);
+    if (user !== undefined && user !== null) {
+      onLogin(user);
+    }
+  }, [formik.values, user, onLogin, setFormData]);
 
-  const user = loginResult.data?.login?.user;
-  if (user !== undefined && user !== null) {
-    onLogin(user);
-    return null;
-  }
   return (
     <Box
       sx={{

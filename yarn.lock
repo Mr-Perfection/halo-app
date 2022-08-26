@@ -2860,14 +2860,6 @@
   dependencies:
     wonka ">= 4.0.9"
 
-"@urql/exchange-auth@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@urql/exchange-auth/-/exchange-auth-1.0.0.tgz#cf846189632662330b616704387b1cf762561638"
-  integrity sha512-79hqPQab+ifeINOxvQykvqub4ixWHBEIagN4U67ijcHGMfp3c4yEWRk4IJMPwF+OMT7LrRFuv+jRIZTQn/9VwQ==
-  dependencies:
-    "@urql/core" ">=3.0.0"
-    wonka "^6.0.0"
-
 "@urql/exchange-graphcache@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@urql/exchange-graphcache/-/exchange-graphcache-5.0.0.tgz#f86f536f016478f4a06d4900b64993cb57c945d9"
