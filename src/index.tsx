@@ -8,7 +8,7 @@ import { ThemeProvider } from '@mui/material/styles';
 // src
 import graphQLClient from 'graphql/client';
 import Copyright from 'components/molecules/Copyright';
-import AppRoutes from 'Routes';
+import AppRoutes from 'app/Routes';
 import theme from './theme';
 
 const rootElement = document.getElementById('root');
