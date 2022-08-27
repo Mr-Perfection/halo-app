@@ -18,7 +18,6 @@ function AdminPage() {
     return (<Navigate to={paths.NOT_FOUND} />);
   }
 
-  console.log('getUsersResult is', getUsersResult);
   return (<div>Hello world</div>);
 }
 

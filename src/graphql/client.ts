@@ -6,7 +6,7 @@ import { devtoolsExchange } from '@urql/devtools';
 import { redirectToLogin } from 'utils/auth';
 
 const client = createClient({
-  url: 'http://localhost:4000/graphql',
+  url: process.env.REACT_APP_APOLLO_CLIENT_URL || '',
   fetchOptions: {
     credentials: 'include',
   },

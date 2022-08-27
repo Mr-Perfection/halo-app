@@ -34,7 +34,14 @@ https://github.com/dotansimha/graphql-code-generator
 
 
 # Deployment
+
+## Deploy S3
 I followed this tutorial with some modifications
 https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-a-react-based-single-page-application-to-amazon-s3-and-cloudfront.html
 
-add `DISABLE_ESLINT_PLUGIN=true` in .env.production
+To successfully run build script, you have to add `DISABLE_ESLINT_PLUGIN=true` for now in .env.production to suppress. Need to clean up the errors in the future.
+
+## Invalidate Cache (after S3 is updated)
+aws cloudfront create-invalidation --distribution-id E1ENF29FUWH1YB --paths "/*"
+
+
