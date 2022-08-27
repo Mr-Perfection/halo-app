@@ -15,8 +15,8 @@ import { ListItemText, Stack } from '@mui/material';
 // src
 import Title from 'components/atoms/Title';
 import Hotkeys from 'components/organisms/Hotkeys';
-import OnlineSwitch from 'components/pages/Operator/OnlineSwitch';
-import { MOCK_RESPONSE } from 'components/pages/Operator/mocks';
+import OnlineSwitch from 'components/features/Operator/OnlineSwitch';
+import { MOCK_RESPONSE } from 'components/features/Operator/mocks';
 
 function OperatorViewContent() {
   return (
