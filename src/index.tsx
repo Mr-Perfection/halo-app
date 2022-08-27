@@ -8,7 +8,7 @@ import { ThemeProvider } from '@mui/material/styles';
 // src
 import graphQLClient from 'graphql/client';
 import Copyright from 'components/molecules/Copyright';
-import AppRoutes from 'app/Routes';
+import App from 'app/App';
 import theme from './theme';
 
 const rootElement = document.getElementById('root');
@@ -21,7 +21,7 @@ root.render(
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Provider value={graphQLClient}>
-          <AppRoutes />
+          <App />
         </Provider>
         <Copyright />
       </ThemeProvider>
