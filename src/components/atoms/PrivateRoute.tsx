@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Navigate, Route, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 import paths from 'constants/nav';
-import { AuthContext } from 'Routes';
+import { AuthContext } from 'app/App';
 
 function PrivateRoute({ element }: { element: JSX.Element }) {
   const currentUser = React.useContext(AuthContext);

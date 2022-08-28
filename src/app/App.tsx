@@ -9,7 +9,7 @@ import { User } from 'generated/graphql';
 import Login from 'components/features/Auth/Login';
 import PrivateRoute from 'components/atoms/PrivateRoute';
 import AdminPage from 'components/features/Admin';
-import AppTemplate from 'components/templates/AppTemplate';
+import AppTemplate from 'components/template/AppTemplate';
 import OperatorPage from 'components/features/Operator';
 import NotFound from 'components/features/NotFound';
 import Redirect from 'components/features/Redirect';
