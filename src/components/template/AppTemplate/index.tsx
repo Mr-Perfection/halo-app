@@ -15,7 +15,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
 import { MainListItems } from 'components/molecules/ListItems';
-import { AuthContext } from 'Routes';
+import { AuthContext } from 'app/App';
 
 const drawerWidth: number = 240;
 
