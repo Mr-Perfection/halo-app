@@ -13,8 +13,11 @@ import Typography from '@mui/material/Typography';
 // src
 import { AuthLoginQueryDocument, User } from 'generated/graphql';
 import { passwordRegex } from 'utils/auth';
+import { useAppDispatch } from 'app/store';
+import { setUser } from 'components/features/Auth/userSlice';
 
-export default function Login({ onLogin }: { onLogin: (user: User) => {} }) {
+export default function LoginPage({ onLogin }: { onLogin: (user: User) => {} }) {
+  const dispatch = useAppDispatch();
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -53,8 +56,9 @@ export default function Login({ onLogin }: { onLogin: (user: User) => {} }) {
     setFormData(formik.values);
     if (user !== undefined && user !== null) {
       onLogin(user);
+      dispatch(setUser(user));
     }
-  }, [formik.values, user, onLogin, setFormData]);
+  }, [formik.values, user, onLogin, setFormData, dispatch]);
 
   return (
     <Box
