@@ -1,6 +1,7 @@
 const paths = {
   ROOT: '/',
   LOGIN: '/login',
+  LOGOUT: '/logout',
   SIGNUP: '/signup',
   ADMIN: '/admin',
   OPERATOR: '/operator',

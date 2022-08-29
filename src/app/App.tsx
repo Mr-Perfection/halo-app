@@ -21,8 +21,8 @@ function App() {
       <Routes>
         {/* TODO: Based on permissions, render root page to operator or dashboard. */}
         <Route path={paths.ROOT} element={<PrivateRoute element={<Redirect />} />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path={paths.SIGNUP} element={<SignupPage />} />
+        <Route path={paths.LOGIN} element={<LoginPage />} />
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path={paths.ADMIN} element={<PrivateRoute element={<AdminPage />} />} />
         <Route path={paths.OPERATOR} element={<PrivateRoute element={<OperatorPage />} />} />
