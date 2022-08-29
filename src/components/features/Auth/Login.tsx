@@ -11,13 +11,16 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // src
-import { AuthLoginQueryDocument, User } from 'generated/graphql';
+import { AuthLoginQueryDocument } from 'generated/graphql';
 import { passwordRegex } from 'utils/auth';
 import { useAppDispatch } from 'app/store';
 import { setUser } from 'components/features/Auth/userSlice';
+import { useNavigate } from 'react-router-dom';
+import paths from 'constants/nav';
 
-export default function LoginPage({ onLogin }: { onLogin: (user: User) => {} }) {
+export default function LoginPage() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -55,10 +58,10 @@ export default function LoginPage({ onLogin }: { onLogin: (user: User) => {} }) 
   useEffect(() => {
     setFormData(formik.values);
     if (user !== undefined && user !== null) {
-      onLogin(user);
       dispatch(setUser(user));
+      navigate(paths.ROOT, { replace: true });
     }
-  }, [formik.values, user, onLogin, setFormData, dispatch]);
+  }, [formik.values, user, setFormData, dispatch, navigate]);
 
   return (
     <Box

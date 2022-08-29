@@ -1,18 +1,17 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // src
 import paths from 'constants/nav';
-import { User, UserRole } from 'generated/graphql';
+import { UserRole } from 'generated/graphql';
+import { useAppSelector } from 'app/store';
 
-// Redirect to appropriate pages.
+// Redirect to the appropriate page based on the user role.
 export default function Redirect() {
-  const location = useLocation();
-  const currentUser = location.state as User;
+  const currentUser = useAppSelector((state) => state.auth.user);
   if (currentUser === null) {
     return (<Navigate to={paths.LOGIN} replace />);
   }
-
   const redirectPath = () => {
     switch (currentUser.role) {
       case UserRole.Admin:

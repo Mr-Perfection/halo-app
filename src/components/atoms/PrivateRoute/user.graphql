@@ -1,0 +1,9 @@
+query privateRouteGetCurrentUser {
+  getUser {
+    id
+    firstName
+    lastName
+    email
+    role
+  }
+}

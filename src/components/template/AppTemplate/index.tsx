@@ -15,7 +15,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
 import { MainListItems } from 'components/molecules/ListItems';
-import { AuthContext } from 'app/App';
+import { useAppSelector } from 'app/store';
 
 const drawerWidth: number = 240;
 
@@ -68,7 +68,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function AppTemplate({ children }: { children: JSX.Element[] | JSX.Element }) {
-  const currentUser = React.useContext(AuthContext);
+  const currentUser = useAppSelector((state) => state.auth.user);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
