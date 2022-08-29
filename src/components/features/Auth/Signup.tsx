@@ -8,11 +8,11 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // src
-import { AuthSignupMutationDocument } from 'generated/graphql';
+import { AuthSignupDocument } from 'generated/graphql';
 import { useMutation } from 'urql';
 
 export default function Signup() {
-  const [signupResult, signup] = useMutation(AuthSignupMutationDocument);
+  const [signupResult, signup] = useMutation(AuthSignupDocument);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

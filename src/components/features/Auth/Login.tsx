@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // src
-import { AuthLoginQueryDocument } from 'generated/graphql';
+import { AuthLoginDocument } from 'generated/graphql';
 import { passwordRegex } from 'utils/auth';
 import { useAppDispatch } from 'app/store';
 import { setUser } from 'components/features/Auth/userSlice';
@@ -39,7 +39,7 @@ export default function LoginPage() {
   });
 
   const [loginResult, login] = useQuery({
-    query: AuthLoginQueryDocument,
+    query: AuthLoginDocument,
     variables: formData,
     pause: true,
   });

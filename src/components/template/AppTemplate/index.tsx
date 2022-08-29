@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
-import { MainListItems } from 'components/molecules/ListItems';
+import NavItemList from 'components/molecules/NavItemList';
 import { useAppSelector } from 'app/store';
 
 const drawerWidth: number = 240;
@@ -140,7 +140,7 @@ export default function AppTemplate({ children }: { children: JSX.Element[] | JS
         </Toolbar>
         <Divider />
         <List component="nav">
-          {MainListItems}
+          <NavItemList />
           {/* <Divider sx={{ my: 1 }} />
             {secondaryListItems} */}
         </List>
