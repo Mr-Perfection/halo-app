@@ -1,0 +1,6 @@
+query GetCustomerBySlug($slug: String) {
+  getCustomer(slug: $slug) {
+    id
+    slug
+  }
+}
