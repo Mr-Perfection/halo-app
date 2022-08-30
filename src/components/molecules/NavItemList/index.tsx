@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 // src
 import ListItemButton from '@mui/material/ListItemButton';
@@ -10,67 +10,20 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMutation } from 'urql';
-import { AuthLogoutDocument } from 'generated/graphql';
+import { AuthLogoutDocument, UserRole } from 'generated/graphql';
 import { redirectToLogin } from 'utils/auth';
+import { useAppSelector } from 'app/store';
+import paths from 'constants/nav';
+import AdminNavItemList from 'components/molecules/NavItemList/AdminNavItemList';
+import OperatorNavItemList from 'components/molecules/NavItemList/OperatorNavItemList';
 // import AssignmentIcon from '@mui/icons-material/Assignment';
 
 export default function NavItemList() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [logoutResult, authLogout] = useMutation(AuthLogoutDocument);
-  const handleLogout = async () => {
-    await authLogout({});
-    redirectToLogin();
-  };
+  const currentUser = useAppSelector((state) => state.auth.user);
+  if (currentUser === null) return (<Navigate to={paths.LOGIN} replace />);
+  const { role } = currentUser;
+  const isAdmin = role !== UserRole.Operator;
   return (
-    <React.Fragment>
-      <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/dashboard">
-        <ListItemButton>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItemButton>
-      </Link>
-      <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/operator">
-        <ListItemButton>
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Operator" />
-        </ListItemButton>
-      </Link>
-      <ListItemButton onClick={handleLogout}>
-        <ListItemIcon>
-          <LogoutIcon />
-        </ListItemIcon>
-        <ListItemText primary="Logout" />
-      </ListItemButton>
-    </React.Fragment>
+    isAdmin ? <AdminNavItemList /> : <OperatorNavItemList />
   );
 }
-
-// export const SecondaryListItems = (
-//   <React.Fragment>
-//     <ListSubheader component="div" inset>
-//       Saved reports
-//     </ListSubheader>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Current month" />
-//     </ListItemButton>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Last quarter" />
-//     </ListItemButton>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Year-end sale" />
-//     </ListItemButton>
-//   </React.Fragment>
-// );
