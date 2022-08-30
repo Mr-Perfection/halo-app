@@ -13,7 +13,11 @@ import NotFound from 'components/features/NotFound';
 import Redirect from 'components/features/Redirect';
 import PublicRoute from 'components/molecules/PublicRoute';
 
+// TODO: create nested routes so we don't need to use this utility method.
+// Also, AppTemplate can be inside nested routes that are signed in.
+// This is not the most optimal approach...
 const getCustomerPath = (path: string) => (`:customerSlug${path}`);
+
 function App() {
   return (
     <AppTemplate>
