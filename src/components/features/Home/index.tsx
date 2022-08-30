@@ -7,7 +7,7 @@ import { UserRole } from 'generated/graphql';
 import { useAppSelector } from 'app/store';
 
 // Redirect to the appropriate page based on the user role.
-export default function Redirect() {
+export default function Home() {
   const currentUser = useAppSelector((state) => state.auth.user);
   if (currentUser === null) {
     return (<Navigate to={paths.LOGIN} replace />);
@@ -15,7 +15,7 @@ export default function Redirect() {
   const redirectPath = () => {
     switch (currentUser.role) {
       case UserRole.Admin:
-        return paths.ADMIN;
+        return paths.DASHBOARD;
       default:
         return paths.OPERATOR;
     }
