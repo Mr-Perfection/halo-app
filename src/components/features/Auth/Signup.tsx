@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'urql';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { isEmpty } from 'lodash';
+import { useMutation } from 'urql';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -11,19 +13,24 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // src
-import { AuthLoginDocument } from 'generated/graphql';
+import { AuthSignupDocument } from 'generated/graphql';
 import { passwordRegex } from 'utils/auth';
 import { useAppDispatch } from 'app/store';
 import { setUser } from 'components/features/Auth/userSlice';
-import { useNavigate, useParams } from 'react-router-dom';
 import paths from 'constants/nav';
 
 export default function SignupPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { companyId } = useParams();
-  console.log('companyId i', companyId);
+  const { customerSlug } = useParams();
+
   const validationSchema = yup.object({
+    firstName: yup
+      .string()
+      .required('First name is required'),
+    lastName: yup
+      .string()
+      .required('Last name is required'),
     email: yup
       .string()
       .email('Enter a valid email')
@@ -34,36 +41,46 @@ export default function SignupPage() {
       .required('Password is required'),
   });
 
-  // Workaround: since there is no useLazyQuery in urql, we can use setState.
-  const [formData, setFormData] = useState({
+  const initialState = {
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
-  });
+  };
 
-  const [loginResult, login] = useQuery({
-    query: AuthLoginDocument,
-    variables: formData,
-    pause: true,
-  });
+  // Workaround: since there is no useLazyQuery in urql, we can use setState.
+  const [formData, setFormData] = useState(initialState);
+
+  const [signupResult, signup] = useMutation(AuthSignupDocument);
 
   const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
+    initialValues: initialState,
     validationSchema,
     onSubmit: () => {
-      login();
+      if (customerSlug !== undefined) {
+        signup({ ...formData, customerSlug });
+      }
     },
   });
-  const user = loginResult.data?.login?.user;
+  const user = signupResult.data?.signup.user;
+  const formikValues = formik.values;
   useEffect(() => {
-    setFormData(formik.values);
+    if (!isEmpty(formikValues)) {
+      setFormData(formikValues);
+    }
+  }, [formikValues, setFormData]);
+
+  useEffect(() => {
     if (user !== undefined && user !== null) {
+      console.log('user', user);
       dispatch(setUser(user));
       navigate(paths.ROOT, { replace: true });
     }
   }, [formik.values, user, setFormData, dispatch, navigate]);
+
+  if (customerSlug === undefined) {
+    return <Navigate to={paths.NOT_FOUND} />;
+  }
 
   return (
     <Box
@@ -83,6 +100,29 @@ export default function SignupPage() {
 
       <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 3, maxWidth: 400 }}>
         <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              autoComplete="given-name"
+              name="firstName"
+              required
+              fullWidth
+              id="firstName"
+              label="First Name"
+              onChange={formik.handleChange}
+              autoFocus
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              id="lastName"
+              label="Last Name"
+              name="lastName"
+              onChange={formik.handleChange}
+              autoComplete="family-name"
+            />
+          </Grid>
           <Grid item xs={12}>
             <TextField
               required
@@ -99,6 +139,7 @@ export default function SignupPage() {
           <Grid item xs={12}>
             <TextField
               fullWidth
+              required
               id="password"
               name="password"
               label="Password"
@@ -122,8 +163,15 @@ export default function SignupPage() {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
-          Login
+          Create account
         </Button>
+        {/* <Grid container justifyContent="flex-end">
+          <Grid item>
+            <Link href="#" variant="body2">
+              Already have an account? Sign in
+            </Link>
+          </Grid>
+        </Grid> */}
       </Box>
     </Box>
   );
