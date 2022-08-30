@@ -17,6 +17,7 @@ import { useAppDispatch } from 'app/store';
 import { setUser } from 'components/features/Auth/userSlice';
 import { useNavigate } from 'react-router-dom';
 import paths from 'constants/nav';
+import { isEmpty } from 'lodash';
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -56,12 +57,18 @@ export default function LoginPage() {
   });
   const user = loginResult.data?.login?.user;
   useEffect(() => {
-    setFormData(formik.values);
     if (user !== undefined && user !== null) {
       dispatch(setUser(user));
       navigate(paths.ROOT, { replace: true });
     }
-  }, [formik.values, user, setFormData, dispatch, navigate]);
+  }, [user, dispatch, navigate]);
+
+  const formikValues = formik.values;
+  useEffect(() => {
+    if (!isEmpty(formikValues)) {
+      setFormData(formikValues);
+    }
+  }, [formikValues, setFormData]);
 
   return (
     <Box
