@@ -1,12 +1,12 @@
-import React from 'react';
-import loadable from '@loadable/component';
+import React, { lazy } from 'react';
 
 import { pathNames } from 'constants/nav';
 import MinimalLayout from 'components/layout/MinimalLayout';
 import InternalRoute from 'components/molecules/InternalRoute';
+import Loadable from 'routes/Loadable';
 
-const Signup = loadable(() => import('components/features/Auth/Signup'));
-const Login = loadable(() => import('components/features/Auth/Login'));
+const Signup = Loadable(lazy(() => import('components/features/Auth/Signup')));
+const Login = Loadable(lazy(() => import('components/features/Auth/Login')));
 
 const AuthenticationRoutes = {
   path: pathNames.ROOT,

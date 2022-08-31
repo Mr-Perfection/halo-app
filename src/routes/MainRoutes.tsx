@@ -1,15 +1,15 @@
-import React from 'react';
-import loadable from '@loadable/component';
+import React, { lazy } from 'react';
 
 import MainLayout from 'components/layout/MainLayout';
 import PrivateRoute from 'components/molecules/PrivateRoute';
 import { UserRole } from 'generated/graphql';
 import { pathNames } from 'constants/nav';
+import Loadable from 'routes/Loadable';
 
-const Home = loadable(() => import('components/features/Home'));
-const Dashboard = loadable(() => import('components/features/Dashboard'));
-const Users = loadable(() => import('components/features/UserList'));
-const Operator = loadable(() => import('components/features/Operator'));
+const Home = Loadable(lazy(() => import('components/features/Home')));
+const Dashboard = Loadable(lazy(() => import('components/features/Dashboard')));
+const Users = Loadable(lazy(() => import('components/features/UserList')));
+const Operator = Loadable(lazy(() => import('components/features/Operator')));
 
 const MainRoutes = {
   path: pathNames.ROOT,
