@@ -9,7 +9,7 @@ import { Box } from '@mui/material';
 import { isEmpty } from 'lodash';
 import { setCustomer } from 'components/features/Customer/customerSlice';
 
-function PublicRoute({ element }: { element: JSX.Element }) {
+function InternalRoute({ element }: { element: JSX.Element }) {
   const dispatch = useAppDispatch();
   const { customerSlug } = useParams();
   const [customerResult] = useQuery({
@@ -34,4 +34,4 @@ function PublicRoute({ element }: { element: JSX.Element }) {
   return element;
 }
 
-export default PublicRoute;
+export default InternalRoute;

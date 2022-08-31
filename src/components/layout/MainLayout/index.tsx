@@ -15,7 +15,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 // src
 import NavItemList from 'components/molecules/NavItemList';
-import { useAppSelector } from 'app/store';
+import { Outlet } from 'react-router-dom';
 
 const drawerWidth: number = 240;
 
@@ -67,20 +67,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function AppTemplate({ children }: { children: JSX.Element[] | JSX.Element }) {
-  const currentUser = useAppSelector((state) => state.auth.user);
+export default function MainLayout() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  if (currentUser === null) {
-    return (
-      <Box>
-        {children}
-      </Box>
-    );
-  }
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="fixed" open={open}>
@@ -141,8 +133,6 @@ export default function AppTemplate({ children }: { children: JSX.Element[] | JS
         <Divider />
         <List component="nav">
           <NavItemList />
-          {/* <Divider sx={{ my: 1 }} />
-            {secondaryListItems} */}
         </List>
       </Drawer>
       <Box
@@ -156,7 +146,7 @@ export default function AppTemplate({ children }: { children: JSX.Element[] | JS
           overflow: 'auto',
         }}
       >
-        {children}
+        <Outlet />
       </Box>
     </Box>
   );

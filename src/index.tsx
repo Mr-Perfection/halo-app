@@ -1,34 +1,13 @@
 import React from 'react';
-import { Provider as ReduxProvider } from 'react-redux';
-import { Provider } from 'urql';
-import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-
 // src
-import graphQLClient from 'graphql/client';
-import Copyright from 'components/molecules/Copyright';
 import App from 'app/App';
-import { store } from 'app/store';
-import theme from './theme';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement!);
 
 root.render(
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Provider value={graphQLClient}>
-            <App />
-          </Provider>
-          <Copyright />
-        </ThemeProvider>
-      </BrowserRouter>
-    </ReduxProvider>
+    <App />
   </React.StrictMode>,
 );
