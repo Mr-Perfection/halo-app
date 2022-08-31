@@ -75,7 +75,7 @@ export default function MainLayout() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} elevation={0}>
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed
