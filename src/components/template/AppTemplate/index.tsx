@@ -83,7 +83,7 @@ export default function AppTemplate({ children }: { children: JSX.Element[] | JS
   }
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="absolute" open={open}>
+      <AppBar position="fixed" open={open}>
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed
@@ -145,7 +145,19 @@ export default function AppTemplate({ children }: { children: JSX.Element[] | JS
             {secondaryListItems} */}
         </List>
       </Drawer>
-      {children}
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: (theme) => (theme.palette.mode === 'light'
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900]),
+          flexGrow: 1,
+          height: '100vh',
+          overflow: 'auto',
+        }}
+      >
+        {children}
+      </Box>
     </Box>
   );
 }

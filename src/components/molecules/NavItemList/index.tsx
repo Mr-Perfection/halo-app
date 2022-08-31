@@ -1,17 +1,8 @@
 import * as React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // src
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-// import ListSubheader from '@mui/material/ListSubheader';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { useMutation } from 'urql';
-import { AuthLogoutDocument, UserRole } from 'generated/graphql';
-import { redirectToLogin } from 'utils/auth';
+import { UserRole } from 'generated/graphql';
 import { useAppSelector } from 'app/store';
 import paths from 'constants/nav';
 import AdminNavItemList from 'components/molecules/NavItemList/AdminNavItemList';

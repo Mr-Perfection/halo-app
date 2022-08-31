@@ -7,6 +7,7 @@ const paths = {
   DASHBOARD: '/dashboard',
   OPERATOR: '/operator',
   USERS: '/users',
+  PROFILE: '/profile',
   NOT_FOUND: '/404',
 };
 

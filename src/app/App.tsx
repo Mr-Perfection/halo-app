@@ -3,8 +3,8 @@ import {
   Routes, Route,
 } from 'react-router-dom';
 
-import { SignupPage, LoginPage } from 'components/features/Auth';
 import paths from 'constants/nav';
+import { SignupPage, LoginPage } from 'components/features/Auth';
 import PrivateRoute from 'components/molecules/PrivateRoute';
 import AppTemplate from 'components/template/AppTemplate';
 import OperatorPage from 'components/features/Operator';
@@ -12,6 +12,7 @@ import NotFound from 'components/features/NotFound';
 import Home from 'components/features/Home';
 import PublicRoute from 'components/molecules/PublicRoute';
 import Dashboard from 'components/features/Dashboard';
+import UserList from 'components/features/UserList';
 import { UserRole } from 'generated/graphql';
 
 // TODO: create nested routes so we don't need to use this utility method.
@@ -44,6 +45,15 @@ function App() {
             <PrivateRoute
               permissions={[UserRole.Admin]}
               element={<Dashboard />}
+            />
+          )}
+        />
+        <Route
+          path={paths.USERS}
+          element={(
+            <PrivateRoute
+              permissions={[UserRole.Admin]}
+              element={<UserList />}
             />
           )}
         />
