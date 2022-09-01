@@ -49,3 +49,7 @@ aws cloudfront create-invalidation --distribution-id E1ENF29FUWH1YB --paths "/*"
 Video entails how to set it up.
 https://www.youtube.com/watch?v=kvlSep7m7Uk
 
+# Feature Requests
+
+## Implement Danger js in the pipeline for code quality and regression prevention
+https://danger.systems/js/
