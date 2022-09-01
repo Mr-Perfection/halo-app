@@ -53,3 +53,19 @@ https://www.youtube.com/watch?v=kvlSep7m7Uk
 
 ## Implement Danger js in the pipeline for code quality and regression prevention
 https://danger.systems/js/
+
+
+# Environments
+probably better to build react app in docker and inject envs via pipeline but not high priority right now.
+
+## .env.development
+```
+REACT_APP_APOLLO_CLIENT_URL=http://localhost:4000/graphql
+ESLINT_NO_DEV_ERRORS=true
+```
+
+## .env.production
+```sh
+REACT_APP_APOLLO_CLIENT_URL=https://graphql.beta.app.getsocialkarma.com/graphql
+DISABLE_ESLINT_PLUGIN=true
+```
