@@ -1,9 +1,0 @@
-query adminGetUsers {
-  getUsers {
-    id
-    firstName
-    lastName
-    email
-    role
-  }
-}
