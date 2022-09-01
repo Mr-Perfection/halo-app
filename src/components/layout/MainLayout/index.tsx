@@ -75,7 +75,7 @@ export default function MainLayout() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" open={open} elevation={0}>
+      <AppBar position="absolute" open={open} elevation={0}>
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed
@@ -144,6 +144,7 @@ export default function MainLayout() {
           flexGrow: 1,
           height: '100vh',
           overflow: 'auto',
+          pt: 10,
         }}
       >
         <Outlet />
