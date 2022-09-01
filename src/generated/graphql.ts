@@ -97,7 +97,8 @@ export type User = {
 /** Roles that determine what permissions the user has access to. */
 export enum UserRole {
   Admin = 'ADMIN',
-  Operator = 'OPERATOR'
+  Operator = 'OPERATOR',
+  Root = 'ROOT'
 }
 
 export type AdminGetUsersQueryVariables = Exact<{ [key: string]: never; }>;
