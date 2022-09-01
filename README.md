@@ -45,3 +45,7 @@ To successfully run build script, you have to add `DISABLE_ESLINT_PLUGIN=true` f
 aws cloudfront create-invalidation --distribution-id E1ENF29FUWH1YB --paths "/*"
 
 
+## Route 53 with custom domain name
+Video entails how to set it up.
+https://www.youtube.com/watch?v=kvlSep7m7Uk
+
