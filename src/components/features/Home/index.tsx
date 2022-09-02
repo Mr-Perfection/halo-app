@@ -14,8 +14,12 @@ export default function Home() {
   }
   const redirectPath = () => {
     switch (currentUser.role) {
+      case UserRole.Root:
+        return paths.DASHBOARD;
       case UserRole.Admin:
         return paths.DASHBOARD;
+      case UserRole.Operator:
+        return paths.OPERATOR;
       default:
         return paths.OPERATOR;
     }
