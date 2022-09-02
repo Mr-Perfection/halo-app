@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useQuery } from 'urql';
 
 import paths from 'constants/nav';
@@ -7,12 +7,12 @@ import { useAppDispatch, useAppSelector } from 'app/store';
 import { PrivateRouteGetCurrentUserDocument, UserRole } from 'generated/graphql';
 import { setUser } from 'components/features/Auth/userSlice';
 import { Box } from '@mui/material';
-import { includes, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import NotFound from 'components/features/NotFound';
+import { hasPermission } from 'utils/auth';
 
 function PrivateRoute({ element, permissions }: { element: JSX.Element, permissions: UserRole[] }) {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const currentUser = useAppSelector((state) => state.auth.user);
 
@@ -34,8 +34,7 @@ function PrivateRoute({ element, permissions }: { element: JSX.Element, permissi
     return (<Navigate to={paths.LOGIN} replace />);
   }
   const userRole = getUserData?.role;
-  if (userRole === undefined || !includes(permissions, userRole)) {
-    navigate(-1);
+  if (userRole === undefined || !hasPermission(userRole, permissions)) {
     return (<NotFound />);
   }
   return element;
