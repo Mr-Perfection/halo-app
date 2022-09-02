@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { DataGrid, GridToolbar, GridColDef } from '@mui/x-data-grid';
-import { Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
+import { AdminGetUsersDocument, User } from 'generated/graphql';
+import { useQuery } from 'urql';
+import LoadingPage from 'components/pages/Loading';
 // import { useQuery } from 'urql';
 // import { AdminGetUsersDocument } from 'generated/graphql';
 
@@ -18,7 +21,7 @@ const columns: GridColDef[] = [
     editable: true,
   },
   {
-    field: 'age',
+    field: 'email',
     headerName: 'Age',
     type: 'number',
     width: 110,
@@ -34,66 +37,40 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
-  {
-    id: 1, lastName: 'Snow', firstName: 'Jon', age: 35,
-  },
-  {
-    id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42,
-  },
-  {
-    id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45,
-  },
-  {
-    id: 4, lastName: 'Stark', firstName: 'Arya', age: 16,
-  },
-  {
-    id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null,
-  },
-  {
-    id: 6, lastName: 'Melisandre', firstName: null, age: 150,
-  },
-  {
-    id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44,
-  },
-  {
-    id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36,
-  },
-  {
-    id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65,
-  },
-];
-
+function UserListTable({ rows } : { rows: User[] }) {
+  return (
+    // TODO: add pagination.
+    <DataGrid
+      rows={rows}
+      columns={columns}
+      pageSize={5}
+      rowsPerPageOptions={[5]}
+      checkboxSelection
+      disableSelectionOnClick
+      experimentalFeatures={{ newEditingApi: true }}
+      components={{ Toolbar: GridToolbar }}
+      componentsProps={{
+        toolbar: {
+          showQuickFilter: true,
+          quickFilterProps: { debounceMs: 500 },
+        },
+      }}
+    />
+  );
+}
 export default function UserList() {
-  // const [{fetching, data, error}] = useQuery({
-  //   query: AdminGetUsersDocument,
-  //   variables: {},
-  // });
-  // // TODO: this can be abstracted as some kind for permission layer component.
-  // // const role = currentUser?.role;
-  // // if (role === undefined || role !== UserRole.Admin) {
-  // //   return (<Navigate to={paths.NOT_FOUND} />);
-  // // }
+  const [{ fetching, data, error }] = useQuery({
+    query: AdminGetUsersDocument,
+    variables: {},
+  });
 
-  // const rows =
+  if (fetching) return <LoadingPage />;
+  const hasError = error || data === undefined;
   return (
     <Paper sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        disableSelectionOnClick
-        experimentalFeatures={{ newEditingApi: true }}
-        components={{ Toolbar: GridToolbar }}
-        componentsProps={{
-          toolbar: {
-            showQuickFilter: true,
-            quickFilterProps: { debounceMs: 500 },
-          },
-        }}
-      />
+      { hasError
+        ? <Box>Something went wrong.</Box>
+        : <UserListTable rows={data.getUsers} />}
     </Paper>
   );
 }
