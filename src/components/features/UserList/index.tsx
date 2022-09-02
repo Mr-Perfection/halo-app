@@ -4,8 +4,6 @@ import { Box, Paper } from '@mui/material';
 import { AdminGetUsersDocument, User } from 'generated/graphql';
 import { useQuery } from 'urql';
 import LoadingPage from 'components/pages/Loading';
-// import { useQuery } from 'urql';
-// import { AdminGetUsersDocument } from 'generated/graphql';
 
 const columns: GridColDef[] = [
   {
