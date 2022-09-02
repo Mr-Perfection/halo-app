@@ -22,9 +22,9 @@ const columns: GridColDef[] = [
   },
   {
     field: 'email',
-    headerName: 'Age',
+    headerName: 'Email',
     type: 'number',
-    width: 110,
+    width: 150,
     editable: true,
   },
   {
