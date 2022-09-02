@@ -6,10 +6,10 @@ import paths from 'constants/nav';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { PrivateRouteGetCurrentUserDocument, UserRole } from 'generated/graphql';
 import { setUser } from 'components/features/Auth/userSlice';
-import { Box } from '@mui/material';
 import { isEmpty } from 'lodash';
 import NotFound from 'components/features/NotFound';
 import { hasPermission } from 'utils/auth';
+import LoadingPage from 'components/pages/Loading';
 
 function PrivateRoute({ element, permissions }: { element: JSX.Element, permissions: UserRole[] }) {
   const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ function PrivateRoute({ element, permissions }: { element: JSX.Element, permissi
   }, [getUserData, fetching, dispatch]);
 
   // TODO: create loading screen.
-  if (fetching) return (<Box>Loading...</Box>);
+  if (fetching) return (<LoadingPage />);
   if (currentUser === null && isEmpty(getUserData)) {
     return (<Navigate to={paths.LOGIN} replace />);
   }
