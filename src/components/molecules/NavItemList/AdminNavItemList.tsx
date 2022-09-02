@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 // import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import StorageIcon from '@mui/icons-material/Storage';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMutation } from 'urql';
@@ -40,8 +41,16 @@ export default function AdminNavItemList() {
           <ListItemText primary="Users" />
         </ListItemButton>
       </Link>
-      <ListItemButton onClick={handleLogout}>
-        <ListItemIcon>
+      <Link style={{ textDecoration: 'none', color: 'inherit' }} to={paths.DB}>
+        <ListItemButton>
+          <ListItemIcon>
+            <StorageIcon />
+          </ListItemIcon>
+          <ListItemText primary="Databases" />
+        </ListItemButton>
+      </Link>
+      <ListItemButton style={{ color: 'red' }} onClick={handleLogout}>
+        <ListItemIcon style={{ color: 'red' }}>
           <LogoutIcon />
         </ListItemIcon>
         <ListItemText primary="Logout" />
