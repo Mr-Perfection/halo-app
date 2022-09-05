@@ -14,7 +14,7 @@ function InternalRoute({ element }: { element: JSX.Element }) {
   const { customerSlug } = useParams();
   const [customerResult] = useQuery({
     query: GetCustomerBySlugDocument,
-    variables: { slug: customerSlug },
+    variables: { slug: customerSlug || '' },
   });
   const { data, fetching } = customerResult;
   const customerResultData = data?.getCustomer;
