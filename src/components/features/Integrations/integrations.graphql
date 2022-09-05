@@ -1,0 +1,9 @@
+mutation integrationsDBCredentials($type: DBType!, $connectionString: String!) {
+  createDBCredentials(type: $type, connectionString: $connectionString) {
+    id
+    connectionString
+    type
+    createdAt
+    updatedAt
+  }
+}
