@@ -25,6 +25,7 @@ function InternalRoute({ element }: { element: JSX.Element }) {
     }
   }, [customerResultData, fetching, dispatch]);
 
+  if (customerSlug === undefined) return <Navigate to={paths.NOT_FOUND} replace />;
   // TODO: create loading screen.
   if (fetching) return (<LoadingPage />);
   if (isEmpty(customerResultData)) {

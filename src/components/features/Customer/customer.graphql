@@ -1,4 +1,4 @@
-query GetCustomerBySlug($slug: String) {
+query GetCustomerBySlug($slug: String!) {
   getCustomer(slug: $slug) {
     id
     slug
