@@ -41,12 +41,12 @@ export default function AdminNavItemList() {
           <ListItemText primary="Users" />
         </ListItemButton>
       </Link>
-      <Link style={{ textDecoration: 'none', color: 'inherit' }} to={paths.DB}>
+      <Link style={{ textDecoration: 'none', color: 'inherit' }} to={paths.INTEGRATION}>
         <ListItemButton>
           <ListItemIcon>
             <StorageIcon />
           </ListItemIcon>
-          <ListItemText primary="Databases" />
+          <ListItemText primary="Integrations" />
         </ListItemButton>
       </Link>
       <ListItemButton style={{ color: 'red' }} onClick={handleLogout}>

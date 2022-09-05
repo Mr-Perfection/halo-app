@@ -5,7 +5,7 @@ import PrivateRoute from 'components/molecules/PrivateRoute';
 import { UserRole } from 'generated/graphql';
 import { pathNames } from 'constants/nav';
 import Loadable from 'routes/Loadable';
-import DBCredentials from 'components/features/DBCredentials';
+import IntegrationList from 'components/features/Integrations';
 
 const Home = Loadable(lazy(() => import('components/features/Home')));
 const Dashboard = Loadable(lazy(() => import('components/features/Dashboard')));
@@ -38,10 +38,10 @@ const MainRoutes = {
       />,
     },
     {
-      path: pathNames.DB,
+      path: pathNames.INTEGRATION,
       element: <PrivateRoute
         permissions={[UserRole.Admin]}
-        element={<DBCredentials />}
+        element={<IntegrationList />}
       />,
     },
     {
