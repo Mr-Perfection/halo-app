@@ -1,6 +1,7 @@
 import React from 'react';
 
 // MUI
+import { Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -147,7 +148,9 @@ export default function MainLayout() {
           pt: 10,
         }}
       >
-        <Outlet />
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Outlet />
+        </Container>
       </Box>
     </Box>
   );
