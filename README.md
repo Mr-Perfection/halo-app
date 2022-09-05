@@ -41,8 +41,14 @@ https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-a-react
 
 To successfully run build script, you have to add `DISABLE_ESLINT_PLUGIN=true` for now in .env.production to suppress. Need to clean up the errors in the future.
 
+```
+aws s3 sync build s3://www-frontend
+```
+
 ## Invalidate Cache (after S3 is updated)
+```
 aws cloudfront create-invalidation --distribution-id E1ENF29FUWH1YB --paths "/*"
+```
 
 
 ## Route 53 with custom domain name
