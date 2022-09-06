@@ -23,9 +23,13 @@ export const integrationsSlice = createSlice({
       ...state,
       databases: [...state.databases, action.payload],
     }),
+    removeDatabase: (state, action: PayloadAction<DbCredentials>) => ({
+      ...state,
+      databases: state.databases.filter((db) => db.id !== action.payload.id),
+    }),
   },
 });
 
-export const { addDatabase, setDatabases } = integrationsSlice.actions;
+export const { addDatabase, removeDatabase, setDatabases } = integrationsSlice.actions;
 export const selectIntegrations = (state: RootState) => state.customer;
 export const integrationsReducer = integrationsSlice.reducer;
