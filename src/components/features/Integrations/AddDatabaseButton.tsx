@@ -19,14 +19,13 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useMutation } from 'urql';
 // src
 import { useAppDispatch } from 'app/store';
-import LoadingPage from 'components/pages/Loading';
-import Card from 'components/molecules/Card';
-import { DbType, IntegrationsDbCredentialsDocument } from 'generated/graphql';
+// import LoadingPage from 'components/pages/Loading';
+import { DbType, CreateIntegrationsDbCredentialsDocument } from 'generated/graphql';
 import { addDatabase } from 'components/features/Integrations/integrationsSlice';
 
 export default function AddDatabaseButton() {
   const [open, setOpen] = useState(false);
-  const [dbCredentials, createDbCredentials] = useMutation(IntegrationsDbCredentialsDocument);
+  const [dbCredentials, createDbCredentials] = useMutation(CreateIntegrationsDbCredentialsDocument);
   const dispatch = useAppDispatch();
 
   const initialState = {
