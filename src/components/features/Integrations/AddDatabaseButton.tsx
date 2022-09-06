@@ -18,13 +18,17 @@ import {
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useMutation } from 'urql';
 // src
+import { useAppDispatch } from 'app/store';
 import LoadingPage from 'components/pages/Loading';
 import Card from 'components/molecules/Card';
 import { DbType, IntegrationsDbCredentialsDocument } from 'generated/graphql';
+import { addDatabase } from 'components/features/Integrations/integrationsSlice';
 
 export default function AddDatabaseButton() {
   const [open, setOpen] = useState(false);
   const [dbCredentials, createDbCredentials] = useMutation(IntegrationsDbCredentialsDocument);
+  const dispatch = useAppDispatch();
+
   const initialState = {
     databaseType: '',
     databaseName: '',
@@ -68,7 +72,7 @@ export default function AddDatabaseButton() {
   const formik = useFormik({
     initialValues: initialState,
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values, { resetForm }) => {
       // createDbCredentials({ type: values})
       console.log('values', values);
       const {
@@ -81,18 +85,21 @@ export default function AddDatabaseButton() {
       } = values;
       const type = databaseType as DbType;
       const connectionString = `${databaseType.toLowerCase()}://${databaseUsername}:${databasePassword}@${host}:${port}/${databaseName}`;
-      createDbCredentials({ type, connectionString });
+      const result = await createDbCredentials({ type, connectionString });
+      const { data } = result;
+      if (data !== undefined) {
+        dispatch(addDatabase(data.createDBCredentials));
+        resetForm();
+      }
       handleClose();
     },
   });
-
-  const credentialsData = dbCredentials.data?.createDBCredentials;
-  console.log('credentialsData', credentialsData);
   return (
     <>
       <Button
         variant="outlined"
         onClick={handleClickOpen}
+        disabled={dbCredentials.fetching}
         startIcon={<AddCircleIcon />}
       >
         Add Database
@@ -190,7 +197,7 @@ export default function AddDatabaseButton() {
               <Button onClick={handleClose}>Cancel</Button>
               <Button
                 type="submit"
-              // disabled={isSubmitting}
+                disabled={dbCredentials.fetching}
               >
                 Submit
 

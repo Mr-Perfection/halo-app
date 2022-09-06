@@ -3,11 +3,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { userReducer } from 'components/features/Auth/userSlice';
 import { customerReducer } from 'components/features/Customer/customerSlice';
+import { integrationsReducer } from 'components/features/Integrations/integrationsSlice';
 
 export const store = configureStore({
   reducer: {
     auth: userReducer,
     customer: customerReducer,
+    integrations: integrationsReducer,
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat([]),
