@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'app/store';
 import { PrivateRouteGetCurrentUserDocument, UserRole } from 'generated/graphql';
 import { setUser } from 'components/features/Auth/userSlice';
 import { isEmpty } from 'lodash';
-import NotFound from 'components/features/NotFound';
+import NotFound from 'components/pages/NotFound';
 import { hasPermission } from 'utils/auth';
 import LoadingPage from 'components/pages/Loading';
 
