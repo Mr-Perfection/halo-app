@@ -72,7 +72,6 @@ export default function SignupPage() {
 
   useEffect(() => {
     if (user !== undefined && user !== null) {
-      console.log('user', user);
       dispatch(setUser(user));
       navigate(paths.ROOT, { replace: true });
     }
