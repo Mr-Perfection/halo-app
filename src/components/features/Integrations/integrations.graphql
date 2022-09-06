@@ -25,6 +25,21 @@ mutation createIntegrationsDBCredentials(
   }
 }
 
+mutation deleteIntegrationsDBCredentials($id: Int!) {
+  deleteDBCredentials(id: $id) {
+    id
+    type
+    host
+    port
+    name
+    username
+    password
+    createdAt
+    updatedAt
+  }
+}
+
+
 query getAllIntegrationsDBCredentials {
   getAllDBCredentials {
     id
