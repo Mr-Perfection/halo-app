@@ -1,5 +1,15 @@
-mutation integrationsDBCredentials($type: DBType!, $connectionString: String!) {
+mutation createIntegrationsDBCredentials($type: DBType!, $connectionString: String!) {
   createDBCredentials(type: $type, connectionString: $connectionString) {
+    id
+    connectionString
+    type
+    createdAt
+    updatedAt
+  }
+}
+
+query getAllIntegrationsDBCredentials {
+  getAllDBCredentials {
     id
     connectionString
     type

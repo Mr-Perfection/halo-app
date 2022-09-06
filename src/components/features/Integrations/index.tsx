@@ -12,23 +12,27 @@ import {
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useQuery } from 'urql';
-import LoadingPage from 'components/pages/Loading';
-import Card from 'components/molecules/Card';
+import LoadingView from 'components/pages/Loading';
 import AddDatabaseButton from 'components/features/Integrations/AddDatabaseButton';
+import { DbCredentials, GetAllIntegrationsDbCredentialsDocument } from 'generated/graphql';
+import IntegrationList from 'components/features/Integrations/IntegrationListView';
+import ErrorPage from 'components/pages/Error';
 
-export default function IntegrationList() {
-  const [open, setOpen] = React.useState(false);
+function IntegrationsContent({ integrations }: { integrations: DbCredentials[] }) {
+  return (<IntegrationList integrations={integrations} />);
+}
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+export default function IntegrationsPage() {
+  const [getAllIntegrationsResult, getAllIntegrations] = useQuery({
+    query: GetAllIntegrationsDbCredentialsDocument,
+  });
+  const { data, error, fetching } = getAllIntegrationsResult;
+  if (error !== undefined || data === undefined) return <ErrorPage />;
+  const integrations = data.getAllDBCredentials;
+  console.log('integrations is', integrations);
   return (
-    <Paper sx={{ minHeight: '50vh', paddingTop: 3, paddingLeft: 3 }}>
-      <AddDatabaseButton />
+    <Paper sx={{ padding: 3 }}>
+      { fetching ? <LoadingView /> : <IntegrationsContent integrations={integrations} />}
     </Paper>
   );
 }
