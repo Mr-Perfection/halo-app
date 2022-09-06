@@ -83,8 +83,14 @@ export default function AddDatabaseButton() {
         databasePassword,
       } = values;
       const type = databaseType as DbType;
-      const connectionString = `${databaseType.toLowerCase()}://${databaseUsername}:${databasePassword}@${host}:${port}/${databaseName}`;
-      const result = await createDbCredentials({ type, connectionString });
+      const result = await createDbCredentials({
+        type,
+        host,
+        port,
+        name: databaseName,
+        username: databaseUsername,
+        password: databasePassword,
+      });
       const { data } = result;
       if (data !== undefined) {
         dispatch(addDatabase(data.createDBCredentials));

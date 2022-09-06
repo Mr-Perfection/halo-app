@@ -1,8 +1,25 @@
-mutation createIntegrationsDBCredentials($type: DBType!, $connectionString: String!) {
-  createDBCredentials(type: $type, connectionString: $connectionString) {
+mutation createIntegrationsDBCredentials(
+  $type: DBType!, 
+  $host: String!,
+  $port: String!,
+  $name: String!,
+  $username: String!,
+  $password: String!) {
+  createDBCredentials(
+    type: $type,
+    host: $host,
+    port: $port,
+    name: $name,
+    username: $username,
+    password: $password,
+  ) {
     id
-    connectionString
     type
+    host
+    port
+    name
+    username
+    password
     createdAt
     updatedAt
   }
@@ -11,8 +28,12 @@ mutation createIntegrationsDBCredentials($type: DBType!, $connectionString: Stri
 query getAllIntegrationsDBCredentials {
   getAllDBCredentials {
     id
-    connectionString
     type
+    host
+    port
+    name
+    username
+    password
     createdAt
     updatedAt
   }

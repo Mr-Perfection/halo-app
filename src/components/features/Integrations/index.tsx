@@ -1,38 +1,40 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import {
-  Button,
   Paper,
-  TextField,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
 } from '@mui/material';
 
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useQuery } from 'urql';
-import LoadingView from 'components/pages/Loading';
-import AddDatabaseButton from 'components/features/Integrations/AddDatabaseButton';
 import { DbCredentials, GetAllIntegrationsDbCredentialsDocument } from 'generated/graphql';
 import IntegrationList from 'components/features/Integrations/IntegrationListView';
 import ErrorPage from 'components/pages/Error';
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { setDatabases } from 'components/features/Integrations/integrationsSlice';
+import LoadingPage from 'components/pages/Loading';
 
 function IntegrationsContent({ integrations }: { integrations: DbCredentials[] }) {
   return (<IntegrationList integrations={integrations} />);
 }
 
 export default function IntegrationsPage() {
-  const [getAllIntegrationsResult, getAllIntegrations] = useQuery({
+  const dispatch = useAppDispatch();
+  const databases = useAppSelector((state) => state.integrations.databases);
+  const [getAllIntegrationsResult] = useQuery({
     query: GetAllIntegrationsDbCredentialsDocument,
   });
   const { data, error, fetching } = getAllIntegrationsResult;
-  if (error !== undefined || data === undefined) return <ErrorPage />;
-  const integrations = data.getAllDBCredentials;
-  console.log('integrations is', integrations);
+
+  useEffect(() => {
+    if (data !== undefined) {
+      dispatch(setDatabases(data.getAllDBCredentials));
+    }
+  }, [data, dispatch]);
+
+  if (error !== undefined) return <ErrorPage />;
+  if (fetching || data === undefined) return <LoadingPage />;
+
   return (
     <Paper sx={{ padding: 3 }}>
-      { fetching ? <LoadingView /> : <IntegrationsContent integrations={integrations} />}
+      <IntegrationsContent integrations={databases} />
     </Paper>
   );
 }

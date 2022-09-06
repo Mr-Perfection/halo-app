@@ -15,6 +15,10 @@ export const integrationsSlice = createSlice({
   name: 'integrationsSlice',
   initialState,
   reducers: {
+    setDatabases: (state, action: PayloadAction<DbCredentials[]>) => ({
+      ...state,
+      databases: action.payload,
+    }),
     addDatabase: (state, action: PayloadAction<DbCredentials>) => ({
       ...state,
       databases: [...state.databases, action.payload],
@@ -22,6 +26,6 @@ export const integrationsSlice = createSlice({
   },
 });
 
-export const { addDatabase } = integrationsSlice.actions;
+export const { addDatabase, setDatabases } = integrationsSlice.actions;
 export const selectIntegrations = (state: RootState) => state.customer;
 export const integrationsReducer = integrationsSlice.reducer;
