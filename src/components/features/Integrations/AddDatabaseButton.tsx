@@ -73,7 +73,6 @@ export default function AddDatabaseButton() {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       // createDbCredentials({ type: values})
-      console.log('values', values);
       const {
         host,
         port,
