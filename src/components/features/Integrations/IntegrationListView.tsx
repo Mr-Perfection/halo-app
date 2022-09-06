@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid,
   Card,
@@ -7,15 +7,51 @@ import {
   CardActions,
   Button,
   TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
 
-import { DbCredentials } from 'generated/graphql';
+import { DbCredentials, DeleteIntegrationsDbCredentialsDocument } from 'generated/graphql';
 import AddDatabaseButton from 'components/features/Integrations/AddDatabaseButton';
+import { useMutation } from 'urql';
+import { useAppDispatch } from 'app/store';
+import { removeDatabase } from 'components/features/Integrations/integrationsSlice';
 
+// TODO: refactor this to new file (IntegrationItem) within this folder.
 function IntegrationItem({ database }: { database: DbCredentials }) {
   const {
-    type, host, port, name, username, password,
+    id, type, host, port, name, username, password,
   } = database;
+  const dispatch = useAppDispatch();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [deletedDBCredentialsResult, deleteDBCredentials] = useMutation(
+    DeleteIntegrationsDbCredentialsDocument,
+  );
+
+  const handleDelete = () => {
+    setOpen(false);
+    deleteDBCredentials({ id });
+  };
+
+  const { data } = deletedDBCredentialsResult;
+  useEffect(() => {
+    if (data) {
+      dispatch(removeDatabase(data.deleteDBCredentials));
+    }
+  }, [data, dispatch]);
   return (
     <Card variant="outlined">
       <CardContent>
@@ -65,14 +101,37 @@ function IntegrationItem({ database }: { database: DbCredentials }) {
         />
       </CardContent>
       <CardActions>
-        <Button size="small">Delete</Button>
+        <Button size="small" onClick={handleClickOpen}>Delete</Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+        >
+          <DialogTitle>
+            Delete Database
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              You are deleting the database credentials. Are you sure?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDelete}>Yes</Button>
+            <Button onClick={handleClose} autoFocus>
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
       </CardActions>
     </Card>
   );
 }
 export default function IntegrationList({ integrations } : { integrations: DbCredentials[] }) {
   return (
-    <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+    <Grid
+      container
+      rowSpacing={3}
+      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+    >
       {integrations.map((integration) => (
         <Grid item xs={6} key={integration.id}>
           <IntegrationItem
