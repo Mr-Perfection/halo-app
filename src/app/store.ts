@@ -4,10 +4,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { userReducer } from 'components/features/Auth/userSlice';
 import { customerReducer } from 'components/features/Customer/customerSlice';
 import { integrationsReducer } from 'components/features/Integrations/integrationsSlice';
+import { alertReducer } from 'components/features/Alert/AlertSlice';
 
 export const store = configureStore({
   reducer: {
     auth: userReducer,
+    alerting: alertReducer,
     customer: customerReducer,
     integrations: integrationsReducer,
   },

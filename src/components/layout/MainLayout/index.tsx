@@ -1,7 +1,7 @@
 import React from 'react';
 
 // MUI
-import { Container } from '@mui/material';
+import { Alert, Container, Snackbar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -17,6 +17,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // src
 import NavItemList from 'components/molecules/NavItemList';
 import { Outlet } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { setAlert } from 'components/features/Alert/AlertSlice';
 
 const drawerWidth: number = 240;
 
@@ -69,9 +71,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MainLayout() {
+  const alert = useAppSelector((state) => state.alerting.alert);
+  const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+  const handleSnackbarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    dispatch(setAlert({ ...alert, open: false }));
   };
 
   return (
@@ -152,6 +163,14 @@ export default function MainLayout() {
           <Outlet />
         </Container>
       </Box>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={alert.open}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert severity={alert.type}>{alert.message}</Alert>
+      </Snackbar>
     </Box>
   );
 }
