@@ -18,10 +18,16 @@ function IntegrationsContent({ integrations }: { integrations: DbCredentials[] }
 export default function IntegrationsPage() {
   const dispatch = useAppDispatch();
   const databases = useAppSelector((state) => state.integrations.databases);
-  const [getAllIntegrationsResult] = useQuery({
+  const [getAllIntegrationsResult, getAllIntegrations] = useQuery({
     query: GetAllIntegrationsDbCredentialsDocument,
+    pause: true,
   });
   const { data, error, fetching } = getAllIntegrationsResult;
+
+  useEffect(() => {
+    getAllIntegrations();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (data !== undefined) {
