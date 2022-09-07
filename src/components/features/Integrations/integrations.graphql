@@ -39,6 +39,24 @@ mutation deleteIntegrationsDBCredentials($id: Int!) {
   }
 }
 
+mutation testIntegrationsDBConnection(
+  $type: DBType!,
+  $host: String!,
+  $port: String!,
+  $name: String!,
+  $username: String!,
+  $password: String!
+  ) {
+  testDBConnection(
+    type: $type,
+    host: $host,
+    port: $port,
+    name: $name,
+    username: $username,
+    password: $password,
+  )
+}
+
 
 query getAllIntegrationsDBCredentials {
   getAllDBCredentials {

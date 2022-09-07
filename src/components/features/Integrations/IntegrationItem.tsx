@@ -14,7 +14,7 @@ import {
   DialogActions,
 } from '@mui/material';
 
-import { DbCredentials, DeleteIntegrationsDbCredentialsDocument } from 'generated/graphql';
+import { DbCredentials, DeleteIntegrationsDbCredentialsDocument, TestIntegrationsDbConnectionDocument } from 'generated/graphql';
 import { useMutation } from 'urql';
 import { useAppDispatch } from 'app/store';
 import { removeDatabase } from 'components/features/Integrations/integrationsSlice';
@@ -40,10 +40,17 @@ export default function IntegrationItem({ database }: { database: DbCredentials 
   const [deletedDBCredentialsResult, deleteDBCredentials] = useMutation(
     DeleteIntegrationsDbCredentialsDocument,
   );
+  const [testDBConnectionResult, testDBConnection] = useMutation(
+    TestIntegrationsDbConnectionDocument,
+  );
 
   const handleDelete = () => {
     setOpen(false);
     deleteDBCredentials({ id });
+  };
+
+  const handleTestConnection = () => {
+    testDBConnection(database);
   };
 
   const { data } = deletedDBCredentialsResult;
@@ -106,7 +113,7 @@ export default function IntegrationItem({ database }: { database: DbCredentials 
         >
           <Grid item xs={6}>
             <Button sx={{ color: 'red' }} size="small" onClick={handleClickOpen}>Delete</Button>
-            <Button size="small">Test Connection</Button>
+            <Button size="small" onClick={handleTestConnection}>Test Connection</Button>
           </Grid>
         </Grid>
         <Dialog
