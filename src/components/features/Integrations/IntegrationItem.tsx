@@ -19,6 +19,7 @@ import { useMutation } from 'urql';
 import { useAppDispatch } from 'app/store';
 import { removeDatabase } from 'components/features/Integrations/integrationsSlice';
 import { PaswordTextField } from 'components/atoms';
+import { setAlert } from 'components/features/Alert/AlertSlice';
 
 // TODO: refactor this to new file (IntegrationItem) within this folder.
 export default function IntegrationItem({ database }: { database: DbCredentials }) {
@@ -27,7 +28,6 @@ export default function IntegrationItem({ database }: { database: DbCredentials 
   } = database;
   const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -53,12 +53,42 @@ export default function IntegrationItem({ database }: { database: DbCredentials 
     testDBConnection(database);
   };
 
-  const { data } = deletedDBCredentialsResult;
   useEffect(() => {
-    if (data) {
-      dispatch(removeDatabase(data.deleteDBCredentials));
+    if (deletedDBCredentialsResult.data) {
+      dispatch(removeDatabase(deletedDBCredentialsResult.data.deleteDBCredentials));
+      dispatch(setAlert({
+        open: true,
+        type: 'success',
+        message: 'Successfully deleted the database credentials.',
+      }));
     }
-  }, [data, dispatch]);
+  }, [deletedDBCredentialsResult.data, dispatch]);
+
+  useEffect(() => {
+    if (testDBConnectionResult.error) {
+      dispatch(setAlert({
+        open: true,
+        type: 'error',
+        message: 'Error trying to connect to the database.',
+      }));
+    } else if (testDBConnectionResult.data) {
+      dispatch(setAlert({
+        open: true,
+        type: 'success',
+        message: 'Successfully tested connection with the database.',
+      }));
+    }
+  }, [testDBConnectionResult, dispatch]);
+
+  useEffect(() => {
+    if (deletedDBCredentialsResult.error) {
+      dispatch(setAlert({
+        open: true,
+        type: 'error',
+        message: 'Error while trying to delete database credentials.',
+      }));
+    }
+  }, [deletedDBCredentialsResult, dispatch]);
 
   const keys = [
     'Host',
@@ -107,12 +137,23 @@ export default function IntegrationItem({ database }: { database: DbCredentials 
       <CardActions>
         <Grid
           container
+          direction="row"
           rowSpacing={1}
-          justifyContent="flex-end"
+          justifyContent="flex-start"
           alignItems="center"
         >
-          <Grid item xs={6}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             <Button sx={{ color: 'red' }} size="small" onClick={handleClickOpen}>Delete</Button>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             <Button size="small" onClick={handleTestConnection}>Test Connection</Button>
           </Grid>
         </Grid>
