@@ -4,11 +4,11 @@ import { RootState } from 'app/store';
 import { DbCredentials } from 'generated/graphql';
 
 interface IIntegrationsState {
-  databases: DbCredentials[];
+  databases: DbCredentials[] | null;
 }
 
 const initialState: IIntegrationsState = {
-  databases: [],
+  databases: null,
 };
 
 export const integrationsSlice = createSlice({
@@ -21,11 +21,11 @@ export const integrationsSlice = createSlice({
     }),
     addDatabase: (state, action: PayloadAction<DbCredentials>) => ({
       ...state,
-      databases: [...state.databases, action.payload],
+      databases: state.databases ? [...state.databases, action.payload] : [action.payload],
     }),
     removeDatabase: (state, action: PayloadAction<DbCredentials>) => ({
       ...state,
-      databases: state.databases.filter((db) => db.id !== action.payload.id),
+      databases: state.databases ? state.databases.filter((db) => db.id !== action.payload.id) : [],
     }),
   },
 });

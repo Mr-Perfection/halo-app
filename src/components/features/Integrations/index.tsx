@@ -30,17 +30,17 @@ export default function IntegrationsPage() {
   }, []);
 
   useEffect(() => {
-    if (data !== undefined) {
+    if (databases === null && data !== undefined) {
       dispatch(setDatabases(data.getAllDBCredentials));
     }
-  }, [data, dispatch]);
+  }, [databases, data, dispatch]);
 
   if (error !== undefined) return <ErrorPage />;
   if (fetching || data === undefined) return <LoadingPage />;
 
   return (
     <Paper sx={{ padding: 3 }}>
-      <IntegrationsContent integrations={databases} />
+      <IntegrationsContent integrations={databases ?? []} />
     </Paper>
   );
 }
