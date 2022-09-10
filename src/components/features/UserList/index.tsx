@@ -19,6 +19,14 @@ const columns: GridColDef[] = [
     editable: true,
   },
   {
+    field: 'fullName',
+    headerName: 'Full Name',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 160,
+    valueGetter: (params) => `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+  {
     field: 'email',
     headerName: 'Email',
     type: 'number',
@@ -26,12 +34,10 @@ const columns: GridColDef[] = [
     editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) => `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    field: 'role',
+    headerName: 'Role',
+    width: 150,
+    editable: true,
   },
 ];
 
