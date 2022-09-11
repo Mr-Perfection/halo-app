@@ -11,6 +11,7 @@ const Dashboard = Loadable(lazy(() => import('components/features/Dashboard')));
 const Users = Loadable(lazy(() => import('components/features/UserList')));
 const Operator = Loadable(lazy(() => import('components/features/Operator')));
 const Integrations = Loadable(lazy(() => import('components/features/Integrations')));
+const Queues = Loadable(lazy(() => import('components/features/Queues')));
 
 const MainRoutes = {
   path: pathNames.ROOT,
@@ -42,6 +43,13 @@ const MainRoutes = {
       element: <PrivateRoute
         permissions={[UserRole.Admin]}
         element={<Integrations />}
+      />,
+    },
+    {
+      path: pathNames.QUEUE,
+      element: <PrivateRoute
+        permissions={[UserRole.Admin]}
+        element={<Queues />}
       />,
     },
     {
