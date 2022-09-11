@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { useMutation } from 'urql';
 
-// src
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-// import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import TaskIcon from '@mui/icons-material/Task';
 import StorageIcon from '@mui/icons-material/Storage';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useMutation } from 'urql';
+
+// src
 import { AuthLogoutDocument } from 'generated/graphql';
 import { redirectToLogin } from 'utils/auth';
 import paths from 'constants/nav';
-// import AssignmentIcon from '@mui/icons-material/Assignment';
+import NavItem from 'components/molecules/NavItemList/NavItem';
 
 export default function AdminNavItemList() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -25,30 +25,10 @@ export default function AdminNavItemList() {
   };
   return (
     <React.Fragment>
-      <Link style={{ textDecoration: 'none', color: 'inherit' }} to={paths.DASHBOARD}>
-        <ListItemButton>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItemButton>
-      </Link>
-      <Link style={{ textDecoration: 'none', color: 'inherit' }} to={paths.USERS}>
-        <ListItemButton>
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Users" />
-        </ListItemButton>
-      </Link>
-      <Link style={{ textDecoration: 'none', color: 'inherit' }} to={paths.INTEGRATION}>
-        <ListItemButton>
-          <ListItemIcon>
-            <StorageIcon />
-          </ListItemIcon>
-          <ListItemText primary="Integrations" />
-        </ListItemButton>
-      </Link>
+      <NavItem to={paths.DASHBOARD} icon={<DashboardIcon />} text="Dashboard" />
+      <NavItem to={paths.USERS} icon={<PeopleIcon />} text="Users" />
+      <NavItem to={paths.INTEGRATION} icon={<StorageIcon />} text="Integrations" />
+      <NavItem to={paths.QUEUE} icon={<TaskIcon />} text="Queues" />
       <ListItemButton style={{ color: 'red' }} onClick={handleLogout}>
         <ListItemIcon style={{ color: 'red' }}>
           <LogoutIcon />
@@ -58,29 +38,3 @@ export default function AdminNavItemList() {
     </React.Fragment>
   );
 }
-
-// export const SecondaryListItems = (
-//   <React.Fragment>
-//     <ListSubheader component="div" inset>
-//       Saved reports
-//     </ListSubheader>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Current month" />
-//     </ListItemButton>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Last quarter" />
-//     </ListItemButton>
-//     <ListItemButton>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Year-end sale" />
-//     </ListItemButton>
-//   </React.Fragment>
-// );
