@@ -1,0 +1,9 @@
+query getAllQueues {
+  getAllQueues {
+    id
+    name
+    widgetCount
+    createdAt
+    updatedAt
+  }
+}
