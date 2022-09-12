@@ -56,11 +56,14 @@ export type Mutation = {
   __typename?: 'Mutation';
   createCustomer: Customer;
   createDBCredentials: DbCredentials;
+  createQueue: Queue;
   deleteDBCredentials: DbCredentials;
+  deleteQueue: Queue;
   logout: Scalars['Boolean'];
   sendQueueItem: QueueItem;
   signup: AuthPayload;
   testDBConnection: Scalars['Boolean'];
+  updateQueue: Queue;
 };
 
 
@@ -79,7 +82,17 @@ export type MutationCreateDbCredentialsArgs = {
 };
 
 
+export type MutationCreateQueueArgs = {
+  name: Scalars['String'];
+};
+
+
 export type MutationDeleteDbCredentialsArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationDeleteQueueArgs = {
   id: Scalars['Int'];
 };
 
@@ -107,6 +120,12 @@ export type MutationTestDbConnectionArgs = {
   port: Scalars['String'];
   type: DbType;
   username: Scalars['String'];
+};
+
+
+export type MutationUpdateQueueArgs = {
+  id: Scalars['Int'];
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -142,7 +161,7 @@ export type Queue = {
   id: Scalars['Int'];
   name: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-  widgetCount: Scalars['Int'];
+  widgetCount?: Maybe<Scalars['Int']>;
 };
 
 export type QueueItem = {
@@ -243,7 +262,14 @@ export type GetAllIntegrationsDbCredentialsQuery = { __typename?: 'Query', getAl
 export type GetAllQueuesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllQueuesQuery = { __typename?: 'Query', getAllQueues: Array<{ __typename?: 'Queue', id: number, name: string, widgetCount: number, createdAt?: any | null, updatedAt?: any | null }> };
+export type GetAllQueuesQuery = { __typename?: 'Query', getAllQueues: Array<{ __typename?: 'Queue', id: number, name: string, widgetCount?: number | null, createdAt?: any | null, updatedAt?: any | null }> };
+
+export type CreateQueueMutationVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type CreateQueueMutation = { __typename?: 'Mutation', createQueue: { __typename?: 'Queue', id: number, name: string } };
 
 export type AdminGetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -265,5 +291,6 @@ export const DeleteIntegrationsDbCredentialsDocument = {"kind":"Document","defin
 export const TestIntegrationsDbConnectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"testIntegrationsDBConnection"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"type"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DBType"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"port"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"testDBConnection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"type"},"value":{"kind":"Variable","name":{"kind":"Name","value":"type"}}},{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}},{"kind":"Argument","name":{"kind":"Name","value":"port"},"value":{"kind":"Variable","name":{"kind":"Name","value":"port"}}},{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}]}}]} as unknown as DocumentNode<TestIntegrationsDbConnectionMutation, TestIntegrationsDbConnectionMutationVariables>;
 export const GetAllIntegrationsDbCredentialsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllIntegrationsDBCredentials"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAllDBCredentials"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"host"}},{"kind":"Field","name":{"kind":"Name","value":"port"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetAllIntegrationsDbCredentialsQuery, GetAllIntegrationsDbCredentialsQueryVariables>;
 export const GetAllQueuesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllQueues"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAllQueues"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"widgetCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetAllQueuesQuery, GetAllQueuesQueryVariables>;
+export const CreateQueueDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createQueue"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createQueue"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<CreateQueueMutation, CreateQueueMutationVariables>;
 export const AdminGetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"adminGetUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}}]}}]} as unknown as DocumentNode<AdminGetUsersQuery, AdminGetUsersQueryVariables>;
 export const PrivateRouteGetCurrentUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"privateRouteGetCurrentUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<PrivateRouteGetCurrentUserQuery, PrivateRouteGetCurrentUserQueryVariables>;

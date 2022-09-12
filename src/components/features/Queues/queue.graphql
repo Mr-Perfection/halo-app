@@ -7,3 +7,10 @@ query getAllQueues {
     updatedAt
   }
 }
+
+mutation createQueue($name: String!) {
+  createQueue(name: $name) {
+    id
+    name
+  }
+}
