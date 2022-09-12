@@ -4,6 +4,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { userReducer } from 'components/features/Auth/userSlice';
 import { customerReducer } from 'components/features/Customer/customerSlice';
 import { integrationsReducer } from 'components/features/Integrations/integrationsSlice';
+import { queuesReducer } from 'components/features/Queues/queuesSlice';
 import { alertReducer } from 'components/features/Alert/AlertSlice';
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     alerting: alertReducer,
     customer: customerReducer,
     integrations: integrationsReducer,
+    queues: queuesReducer,
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat([]),
